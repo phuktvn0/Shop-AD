@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import $ from "jquery";
 import { useDispatch } from "react-redux";
 import { logout } from "../Redux/Actions/UserActions";
 
 const Header = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     function openMenu() {
@@ -36,6 +37,7 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(logout());
+    navigate("/");
   };
 
   return (

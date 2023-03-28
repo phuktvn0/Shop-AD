@@ -64,7 +64,7 @@ export const login = (email, password) => async (dispatch) => {
 // LOGOUT
 export const logout = () => (dispatch) => {
   localStorage.clear();
-  window.location.reload(true);
+  // window.location.reload(true);
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_LIST_RESET });
 };
