@@ -45,7 +45,7 @@ export const login = (email, password) => async (dispatch) => {
     }
 
     localStorage.setItem("userInfo", JSON.stringify(data));
-    window.location.reload(true);
+    // window.location.reload(true);
   } catch (error) {
     const message =
       error.response && error.response.data.message
