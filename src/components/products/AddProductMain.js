@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -7,6 +7,7 @@ import { createProduct } from "./../../Redux/Actions/ProductActions";
 import Toast from "../LoadingError/Toast";
 import Message from "../LoadingError/Error";
 import Loading from "../LoadingError/Loading";
+import { cloudinaryUpload } from "../../cloudinary";
 
 const ToastObjects = {
   pauseOnFocusLoss: false,
@@ -22,6 +23,7 @@ const AddProductMain = () => {
   const [size, setSize] = useState([]);
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
+  const fileInput = useRef();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -38,7 +40,7 @@ const AddProductMain = () => {
       setColor([]);
       setSize([]);
       setCountInStock(0);
-      setImage("");
+      setImage();
       setPrice(0);
       setTimeout(() => {
         navigate("/products");
@@ -48,16 +50,19 @@ const AddProductMain = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const product1 = {
-      name,
-      price,
-      description,
-      color,
-      size,
-      image,
-      countInStock,
-    };
-    dispatch(createProduct(product1));
+    setTimeout(() => {
+      const product1 = {
+        name,
+        price,
+        description,
+        color,
+        size,
+        image,
+        countInStock,
+      };
+      console.log(product1);
+      dispatch(createProduct(product1));
+    }, 3000);
   };
   const handlerColor = (e) => {
     const indexOfValue = color.indexOf(e.target.value);
@@ -79,6 +84,15 @@ const AddProductMain = () => {
       setSize([...array1, ...array2]);
     }
   };
+
+  const handleFile = async (e) => {
+    const file = fileInput.current.files[0];
+    if (file) {
+      const imageUrl = await cloudinaryUpload(file);
+      setImage(imageUrl);
+    }
+  };
+
   return (
     <>
       <Toast />
@@ -324,11 +338,10 @@ const AddProductMain = () => {
                     <label className="form-label">Hình ảnh</label>
                     <input
                       className="form-control"
-                      type="text"
-                      placeholder="Enter Image URL"
-                      value={image}
+                      type="file"
+                      ref={fileInput}
                       required
-                      onChange={(e) => setImage(e.target.value)}
+                      onChange={handleFile}
                     />
                   </div>
                 </div>

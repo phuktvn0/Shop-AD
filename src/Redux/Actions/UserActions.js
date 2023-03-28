@@ -45,6 +45,7 @@ export const login = (email, password) => async (dispatch) => {
     }
 
     localStorage.setItem("userInfo", JSON.stringify(data));
+    window.location.reload(true);
   } catch (error) {
     const message =
       error.response && error.response.data.message
@@ -62,7 +63,8 @@ export const login = (email, password) => async (dispatch) => {
 
 // LOGOUT
 export const logout = () => (dispatch) => {
-  localStorage.removeItem("userInfo");
+  localStorage.clear();
+  window.location.reload(true);
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_LIST_RESET });
 };
