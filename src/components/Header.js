@@ -53,7 +53,7 @@ const Header = () => {
       <div className="col-search">
         <form className="searchform">
           <div className="input-group">
-            <input
+            {/* <input
               list="search_terms"
               type="text"
               className="form-control"
@@ -61,14 +61,14 @@ const Header = () => {
             />
             <button className="btn btn-light bg" type="button">
               <i className="far fa-search"></i>
-            </button>
+            </button> */}
           </div>
-          <datalist id="search_terms">
+          {/* // <datalist id="search_terms">
             <option value="Products" />
             <option value="New orders" />
             <option value="Apple iphone" />
-            <option value="Ahmed Hassan" />
-          </datalist>
+            <option value="Ahmed Hassan" /> 
+           </datalist> */}
         </form>
       </div>
       <div className="col-nav">
