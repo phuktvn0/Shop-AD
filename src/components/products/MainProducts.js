@@ -10,8 +10,8 @@ const MainProducts = () => {
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(3);
-  const [searchTerm, setSearchTerm] = useState(""); // Thêm state searchTerm
+  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
@@ -24,7 +24,7 @@ const MainProducts = () => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // Sửa currentItems để tìm kiếm trên toàn bộ dữ liệu
+
   const currentItems = products
     .filter((product) => {
       if (searchTerm === "") {
@@ -46,10 +46,9 @@ const MainProducts = () => {
     pageNumbers.push(i);
   }
 
-  // Sửa hàm handleSearch để cập nhật state searchTerm
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
-    setCurrentPage(1); // Reset currentPage khi thực hiện tìm kiếm
+    setCurrentPage(1);
   };
 
   return (
@@ -71,8 +70,8 @@ const MainProducts = () => {
                 type="search"
                 placeholder="Search..."
                 className="form-control p-2"
-                value={searchTerm} // Thêm giá trị của searchTerm vào ô input
-                onChange={handleSearch} // Sửa hàm handleSearch
+                value={searchTerm}
+                onChange={handleSearch}
               />
             </div>
             <div className="col-lg-2 col-6 col-md-3">
